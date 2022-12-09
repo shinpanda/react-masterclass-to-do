@@ -1,16 +1,17 @@
-import React from "react";
-import Router from "./Router";
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header";
 
 
-function App() {
+function Root() {
   return (
     <div>
-      <Router />
+      <Header />
+      <Outlet />
     </div>
   );
 }
 
-export default App;
+export default Root;
 
 
 /* import styled from "styled-components";
