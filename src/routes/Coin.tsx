@@ -1,5 +1,3 @@
-import { constants } from "buffer";
-import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import {
   Switch,
@@ -208,7 +206,7 @@ function Coin() {
 
           <Switch>
             <Route path={`/${coinId}/price`}>
-              <Price coinId={coinId} />
+              <Price quotes={tickersData?.quotes} />
             </Route>
             <Route path={`/${coinId}/chart`}>
               <Chart coinId={coinId} />
