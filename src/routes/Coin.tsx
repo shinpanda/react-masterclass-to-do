@@ -9,6 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
+import Home from "../screens/Home";
 import Chart from "./Chart";
 import Price from "./Price";
 
@@ -145,6 +146,20 @@ interface TickersData {
   };
 }
 
+const HomeBtn = styled.button`
+  display: inline-block;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: ${(props) => props.theme.btnBgColor};
+  color: ${(props) => props.theme.btnColor};
+  top: 10px;
+  left: 10px;
+  border: 0px;
+  box-shadow: 5px 5px 10px 2px #00000061;
+`;
+
 function Coin() {
   const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
@@ -160,6 +175,9 @@ function Coin() {
 
   return (
     <Container>
+      <HomeBtn>
+        <Link to="/">Home</Link>
+      </HomeBtn>
       <Header>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
