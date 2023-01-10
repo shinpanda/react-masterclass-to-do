@@ -14,6 +14,6 @@ export const darkTheme: DefaultTheme = {
   textColor: "white",
   accentColor: "#feca57",
   cardBgColor: "rgba(0,0,0,0.15)",
-  btnColor: "#111",
-  btnBgColor: "#white",
+  btnColor: "white",
+  btnBgColor: "#2f3640",
 };
