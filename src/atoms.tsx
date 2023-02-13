@@ -1,28 +1,22 @@
 import { atom, selector } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
-export const categorysState = atom<string[]>({
-  key: "categorys",
-  default: ["TO_DO", "DOING", "DONE"],
-});
-
 export interface IToDo {
   text: string;
   id: number;
   category: string;
 }
 
-const { persistAtom } = recoilPersist({});
+const { persistAtom } = recoilPersist({
+  key: "localData",
+  storage: localStorage,
+});
 
-const KEY = "TODOS";
-const setLocalStorage = (toDo: IToDo[]) => {
-  localStorage.setItem(KEY, JSON.stringify(toDo));
-};
-
-const getLocalStorage = () => {
-  const toDos = localStorage.getItem(KEY);
-  return toDos !== null ? (JSON.parse(toDos) as IToDo[]) : [];
-};
+export const categorysState = atom<string[]>({
+  key: "categorys",
+  default: ["TO_DO", "DOING", "DONE"],
+  effects_UNSTABLE: [persistAtom],
+});
 
 export const categoryState = atom({
   key: "category",
@@ -31,14 +25,8 @@ export const categoryState = atom({
 
 export const toDoState = atom<IToDo[]>({
   key: "toDo",
-  default: getLocalStorage(),
-  effects: [
-    ({ onSet }) => {
-      onSet((newValue) => {
-        setLocalStorage(newValue);
-      });
-    },
-  ],
+  default: [],
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const toDoSelector = selector({
